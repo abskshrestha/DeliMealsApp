@@ -10,17 +10,24 @@ class CategoriesScreen extends StatelessWidget {
         title: Text('DeliMeals'),
       ),
       body: GridView(
-        padding: EdgeInsets.all(25.0),
+        padding: const EdgeInsets.all(25.0),
         children: DUMMY_CATEGORIES
             .map((catData) =>
-                CategoryItem(title: catData.title, color: catData.color))
+                CategoryItem(
+                  title: catData.title, 
+                  color: catData.color))
             .toList(),
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 200,
           childAspectRatio: 3/2,
-          mainAxisSpacing: 100,
-          crossAxisSpacing: 100,
+          mainAxisSpacing: 50,
+          crossAxisSpacing: 25,      
+                
+
         ),
+      
+      
+      
       ),
     );
   }
