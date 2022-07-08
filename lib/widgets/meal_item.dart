@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../screens/meal_detail_screen.dart';
 import '../models/meal.dart';
 
@@ -36,7 +35,7 @@ class MealItem extends StatelessWidget {
     }
   }
 
-  String get affordabilityText {
+  String get AffordabilityText {
     switch (affordability) {
       case Affordability.Affordable:
         return 'Affordable';
@@ -45,7 +44,7 @@ class MealItem extends StatelessWidget {
         return 'Pricey';
         break;
       case Affordability.Luxurious:
-        return 'Expensive';
+        return 'Luxurious';
         break;
       default:
         return 'Unknown';
@@ -53,10 +52,7 @@ class MealItem extends StatelessWidget {
   }
 
   void selectMeal(BuildContext context) {
-    Navigator.of(context).pushNamed(
-      MealDetailScreen.routeName,
-      arguments: id,
-    );
+    Navigator.of(context).pushNamed(MealDetailScreen.routeName, arguments: id);
   }
 
   @override
@@ -95,14 +91,26 @@ class MealItem extends StatelessWidget {
                       vertical: 5,
                       horizontal: 20,
                     ),
-                    child: Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: 26,
-                        color: Colors.white,
+                    child: Positioned(
+                      bottom: 20,
+                      right: 10,
+                      child: Container(
+                        width: 250,
+                        color: Colors.black54,
+                        padding: EdgeInsets.symmetric(
+                          vertical: 5,
+                          horizontal: 20,
+                        ),
+                        child: Text(
+                          title,
+                          style: TextStyle(
+                            fontSize: 26,
+                            color: Colors.white,
+                          ),
+                          softWrap: true,
+                          overflow: TextOverflow.fade,
+                        ),
                       ),
-                      softWrap: true,
-                      overflow: TextOverflow.fade,
                     ),
                   ),
                 )
@@ -143,7 +151,7 @@ class MealItem extends StatelessWidget {
                       SizedBox(
                         width: 6,
                       ),
-                      Text(affordabilityText),
+                      Text(AffordabilityText),
                     ],
                   ),
                 ],
