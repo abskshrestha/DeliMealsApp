@@ -8,6 +8,11 @@ class FiltersScreen extends StatefulWidget {
 
   static const routeName = '/filters';
 
+  final Function saveFilters;
+  final Map<String, bool> currentFilters;
+
+  FiltersScreen(this.currentFilters, this.saveFilters);
+
   @override
   State<FiltersScreen> createState() => _FiltersScreenState();
 }
@@ -17,6 +22,15 @@ class _FiltersScreenState extends State<FiltersScreen> {
   var _vegan = false;
   var _vegetarian = false;
   var _lactoseFree = false;
+
+  @override
+  initState(){
+    _glutenFree = widget.currentFilters['gluten'];
+    _lactoseFree = widget.currentFilters['lactose'];
+    _vegan = widget.currentFilters['vegan'];
+    _vegetarian = widget.currentFilters['vegetarian'];
+      super.initState();
+  }
 
   Widget _buildSwitchListTile(String title, String description,
       bool currentValue, Function updateValue) {
@@ -33,6 +47,19 @@ class _FiltersScreenState extends State<FiltersScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Your Filters'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.save), 
+            onPressed: (){            
+            widget.saveFilters({ //diff from maimillan
+              'gluten': _glutenFree,
+              'lactose': _lactoseFree,
+              'vegan': _vegan,
+              'vegetarian': _vegetarian,
+            });
+          }
+          ),
+        ],
       ),
       drawer: MainDrawer(),
       body: Column(
@@ -57,7 +84,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     });
                   },
                 ),
-                 _buildSwitchListTile(
+                _buildSwitchListTile(
                   "Vegan",
                   "Only includes meals that are Vegan",
                   _vegan,
@@ -67,7 +94,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     });
                   },
                 ),
-                 _buildSwitchListTile(
+                _buildSwitchListTile(
                   "Vegetarian",
                   "Only includes meals that are vegetarian",
                   _vegetarian,
@@ -77,7 +104,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     });
                   },
                 ),
-                 _buildSwitchListTile(
+                _buildSwitchListTile(
                   "Lactose-free",
                   "Only includes meals that are Lactose free",
                   _lactoseFree,
@@ -87,7 +114,6 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     });
                   },
                 ),
-
               ],
             ),
           )
